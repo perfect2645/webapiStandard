@@ -1,4 +1,11 @@
+using WebapiStandard.Configurations.Swagger;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.ConfigApiVersion();
+//log4net
+builder.Logging.AddLog4Net("log4net.config");
 
 // Add services to the container.
 
