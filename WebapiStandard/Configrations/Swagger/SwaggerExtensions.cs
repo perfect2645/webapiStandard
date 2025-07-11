@@ -51,8 +51,9 @@ namespace WebapiStandard.Configurations.Swagger
 
                 foreach (var description in provider.ApiVersionDescriptions.Reverse())
                 {
+                    var versionName = $"{app.Environment.ApplicationName} {description.GroupName.ToUpperInvariant()}";
                     options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                        $"{app.Environment.ApplicationName}{description.GroupName.ToUpperInvariant}");
+                        versionName);
                 }
             });
         }

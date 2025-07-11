@@ -32,10 +32,10 @@ namespace WebapiStandard.Configurations.Swagger
 
         private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
         {
-            var text = new StringBuilder("This service provides APIs for managing messaging operations. ");
+            var text = new StringBuilder("This service provides APIs for testing and studying. ");
             var info = new OpenApiInfo()
             {
-                Title = "Messaging API",
+                Title = "WebApi service for studying",
                 Version = description.ApiVersion.ToString(),
                 Contact = new OpenApiContact()
                 {
