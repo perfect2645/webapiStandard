@@ -1,6 +1,6 @@
 ﻿namespace WebapiStandard.Result
 {
-    public class ApiJsonResult : IApiResult<string>
+    public class ApiStringResult : IApiResult<string>
     {
         public string? Message { get; set; }
         public int StatusCode { get; set; }

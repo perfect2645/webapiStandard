@@ -1,3 +1,6 @@
+using log4net.Config;
+using log4net;
+using System.Reflection;
 using WebapiStandard.Configurations.Services;
 using WebapiStandard.Configurations.Swagger;
 
