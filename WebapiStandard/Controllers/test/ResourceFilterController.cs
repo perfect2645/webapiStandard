@@ -7,7 +7,7 @@ namespace WebapiStandard.Controllers.test
 {
     [ApiController]
     [Route("[controller]")]
-    [ApiVersion(3)]
+    [ApiVersion(1.0)]
     public class ResourceFilterController
     {
         private readonly ILogger<ResourceFilterController> _logger;

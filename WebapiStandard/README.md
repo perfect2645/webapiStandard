@@ -9,3 +9,11 @@
 
 ### Package - Log4Net
 [Log4Net](https://logging.apache.org/log4net/)
+
+### Package - JWT
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+
+### Swagger extension / Annotations
+Swashbuckle.AspNetCore
+Swashbuckle.AspNetCore.Annotations

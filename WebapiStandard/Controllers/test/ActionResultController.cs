@@ -8,7 +8,7 @@ namespace WebapiStandard.Controllers.test
 {
     [Route("[controller]")]
     [ApiController]
-    [ApiVersion(3)]
+    [ApiVersion(1.0)]
     public class ActionResultController : ControllerBase
     {
         [HttpGet]

@@ -12,7 +12,7 @@ builder.ConfigApiVersion();
 builder.Logging.AddLog4Net("log4net.config");
 
 // Add services to the container.
-builder.Services.Register();
+builder.RegisterServices();
 builder.Services.AllowCors();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.AddSwaggerGenExt();
