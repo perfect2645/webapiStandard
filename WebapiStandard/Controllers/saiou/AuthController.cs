@@ -1,5 +1,4 @@
 ﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebapiStandard.Models.Auth;
 using WebapiStandard.Services.Auth;
@@ -38,8 +37,10 @@ namespace WebapiStandard.Controllers.saiou
 
             return Ok(new
             {
-                Token = token,
-                ExpiresIn = 30 * 60 // 示例过期时间(秒)
+                Msg = "Login Successfully.",
+                Data = token,
+                Code = 200,
+                Success = true,
             });
         }
     }
