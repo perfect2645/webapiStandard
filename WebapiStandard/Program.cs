@@ -1,19 +1,28 @@
+using log4net.Config;
+using log4net;
+using System.Reflection;
+using WebapiStandard.Configurations.Services;
+using WebapiStandard.Configurations.Swagger;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-builder.Services.AddControllers();
+builder.ConfigApiVersion();
+//log4net
+builder.Logging.AddLog4Net("log4net.config");
+
+// Add services to the container.
+builder.RegisterServices();
+builder.Services.AllowCors();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.AddSwaggerGenExt();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerExt();
 }
 
 app.UseHttpsRedirection();
