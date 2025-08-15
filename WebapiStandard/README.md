@@ -17,3 +17,12 @@ Microsoft.AspNetCore.Authentication.JwtBearer
 ### Swagger extension / Annotations
 Swashbuckle.AspNetCore
 Swashbuckle.AspNetCore.Annotations
+
+## Entity Framework
+### Package - Entity Framework Core
+- Microsoft.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.SqlServer
+- Microsoft.EntityFrameworkCore.Tools
+### Package - Webapi
+- Microsoft.EntityFrameworkCore.Design
+

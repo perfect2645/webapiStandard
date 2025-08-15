@@ -17,12 +17,18 @@
     <PackageReference Include="Autofac" Version="8.3.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Study\Laboratory\Db.React.Study\Db.React.Study.csproj" />
     <ProjectReference Include="..\..\..\..\Study\Laboratory\Logging\Logging.csproj" />
+    <ProjectReference Include="..\..\..\..\Study\Laboratory\React.Study\React.Study.csproj" />
     <ProjectReference Include="..\..\..\..\Study\Laboratory\SaiouServie\SaiouService.csproj" />
     <ProjectReference Include="..\..\..\..\Study\Laboratory\Utils\Utils.csproj" />
   </ItemGroup>
