@@ -45,5 +45,13 @@ namespace WebapiStandard.Controllers.react.study
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError.ToInt());
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<StudentDto>> CreateStudent([FromBody] CreateStudentDto studentDto)
+        {
+            var newStudent = await _studentService.CreateStudentAsync(studentDto);
+
+            return newStudent;
+        }
     }
 }
