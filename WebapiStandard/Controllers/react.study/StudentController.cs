@@ -2,24 +2,29 @@
 using Microsoft.AspNetCore.Mvc;
 using React.Study.Dto;
 using React.Study.Services;
+using SaiouService.api;
 using Utils.Generic;
+using Utils.Json;
 
 namespace WebapiStandard.Controllers.react.study
 {
     [Controller]
     [Route("[controller]")]
     [ApiVersion(3.0)]
-    public class StudentController
+    public class StudentController : ControllerBase
     {
+        private readonly ILogger<StudentController> _logger;
         private readonly IStudentService _studentService;
 
-        public StudentController(IStudentService studentService)
+        public StudentController(ILogger<StudentController> logger, IStudentService studentService)
         {
+            _logger = logger;
             _studentService = studentService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<StudentDto>>> GetStudents()
+        [Route("all")]
+        public async Task<ActionResult<ApiResult<IEnumerable<StudentDto>>>> GetStudents()
         {
             try
             {
@@ -38,7 +43,7 @@ namespace WebapiStandard.Controllers.react.study
 
                 }).ToList();
 
-                return new ActionResult<List<StudentDto>>(studentDtos);
+                return Ok(new ApiResponse<IEnumerable<StudentDto>>(studentDtos));
             }
             catch (Exception ex)
             {
@@ -47,11 +52,23 @@ namespace WebapiStandard.Controllers.react.study
         }
 
         [HttpPost]
-        public async Task<ActionResult<StudentDto>> CreateStudent([FromBody] CreateStudentDto studentDto)
+        public async Task<ActionResult<StudentDto>> CreateStudent(CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
 
             return newStudent;
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<ActionResult<StudentDto>> DeleteStudent(int id)
+        {
+            var studentDto = await _studentService.DeleteStudentAsync(id);
+            if (studentDto == null)
+            {
+                return NotFound();
+            }
+            return studentDto;
         }
     }
 }
