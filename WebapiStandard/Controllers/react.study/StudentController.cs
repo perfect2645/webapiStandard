@@ -1,5 +1,7 @@
 ﻿using Asp.Versioning;
+using Logging;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using React.Study.Dto;
 using React.Study.Services;
 using SaiouService.api;
@@ -43,6 +45,8 @@ namespace WebapiStandard.Controllers.react.study
 
                 }).ToList();
 
+                Log4Logger.Logger.Info($"GetStudents");
+
                 return Ok(new ApiResponse<IEnumerable<StudentDto>>(studentDtos));
             }
             catch (Exception ex)
@@ -52,7 +56,7 @@ namespace WebapiStandard.Controllers.react.study
         }
 
         [HttpPost]
-        public async Task<ActionResult<StudentDto>> CreateStudent(CreateStudentDto studentDto)
+        public async Task<ActionResult<StudentDto>> CreateStudent([FromForm] CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
 
