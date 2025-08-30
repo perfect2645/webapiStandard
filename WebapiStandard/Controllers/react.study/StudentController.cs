@@ -7,10 +7,11 @@ using React.Study.Services;
 using SaiouService.api;
 using Utils.Generic;
 using Utils.Json;
+using WebapiStandard.Filters.react.Study;
 
 namespace WebapiStandard.Controllers.react.study
 {
-    [Controller]
+    [ApiController]
     [Route("[controller]")]
     [ApiVersion(3.0)]
     public class StudentController : ControllerBase
@@ -55,11 +56,19 @@ namespace WebapiStandard.Controllers.react.study
             }
         }
 
+        [HttpGet("{id}")]
+        [TypeFilter(typeof(StudentValidationFilterAttribute))]
+        public async Task<ActionResult<StudentDto>> GetStudentById(int id)
+        {
+            var targetSutdent = await _studentService.GetStudentByIdAsync(id);
+
+            return Ok(targetSutdent);
+        }
+
         [HttpPost]
         public async Task<ActionResult<StudentDto>> CreateStudent([FromForm] CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
-
             return newStudent;
         }
 
