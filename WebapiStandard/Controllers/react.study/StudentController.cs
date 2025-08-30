@@ -1,7 +1,6 @@
 ﻿using Asp.Versioning;
 using Logging;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using React.Study.Dto;
 using React.Study.Services;
 using SaiouService.api;
@@ -57,7 +56,7 @@ namespace WebapiStandard.Controllers.react.study
         }
 
         [HttpGet("{id}")]
-        [TypeFilter(typeof(StudentValidationFilterAttribute))]
+        [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
         public async Task<ActionResult<StudentDto>> GetStudentById(int id)
         {
             var targetSutdent = await _studentService.GetStudentByIdAsync(id);

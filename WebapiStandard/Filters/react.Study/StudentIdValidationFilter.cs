@@ -4,17 +4,16 @@ using React.Study.Services;
 
 namespace WebapiStandard.Filters.react.Study
 {
-    public class StudentValidationFilterAttribute: ActionFilterAttribute
+    public class StudentIdValidationFilterAttribute: ActionFilterAttribute
     {
         private readonly IStudentService _studentService;
-        public StudentValidationFilterAttribute(IStudentService studentService) 
+        public StudentIdValidationFilterAttribute(IStudentService studentService) 
         {
             _studentService = studentService;
         }
 
-        public override void OnActionExecuting(ActionExecutingContext context)
+        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            base.OnActionExecuting(context);
             var id = context.ActionArguments["id"] as int?;
             if (!id.HasValue)
             {
@@ -32,7 +31,7 @@ namespace WebapiStandard.Filters.react.Study
                 return;
             }
 
-            if (!_studentService.StudentExists(id.Value))
+            if (!await _studentService.StudentExistsAsync(id.Value))
             {
                 context.ModelState.AddModelError("Id", "Student doesn't exist.");
                 var problemDetails = new ValidationProblemDetails(context.ModelState)
@@ -41,6 +40,8 @@ namespace WebapiStandard.Filters.react.Study
                 };
                 context.Result = new BadRequestObjectResult(problemDetails);
             }
+
+            await next();
         }
     }
 }
