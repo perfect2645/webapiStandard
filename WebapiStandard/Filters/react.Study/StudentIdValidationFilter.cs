@@ -31,7 +31,8 @@ namespace WebapiStandard.Filters.react.Study
                 return;
             }
 
-            if (!await _studentService.StudentExistsAsync(id.Value))
+            var student = _studentService.GetStudentByIdAsync(id.Value);
+            if (student == null)
             {
                 context.ModelState.AddModelError("Id", "Student doesn't exist.");
                 var problemDetails = new ValidationProblemDetails(context.ModelState)
@@ -39,7 +40,10 @@ namespace WebapiStandard.Filters.react.Study
                     Status = StatusCodes.Status404NotFound,
                 };
                 context.Result = new BadRequestObjectResult(problemDetails);
+                return;
             }
+
+            context.HttpContext.Items.TryAdd("student", student);
 
             await next();
         }

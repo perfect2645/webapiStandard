@@ -1,9 +1,7 @@
 ﻿using Asp.Versioning;
-using Logging;
 using Microsoft.AspNetCore.Mvc;
 using React.Study.Dto;
 using React.Study.Services;
-using SaiouService.api;
 using Utils.Generic;
 using Utils.Json;
 using WebapiStandard.Filters.react.Study;
@@ -26,28 +24,12 @@ namespace WebapiStandard.Controllers.react.study
 
         [HttpGet]
         [Route("all")]
-        public async Task<ActionResult<ApiResult<IEnumerable<StudentDto>>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<StudentDto>?>> GetStudents()
         {
             try
             {
                 var students = await _studentService.GetAllStudentsAsync();
-
-                var studentDtos = students.Select(s => new StudentDto
-                {
-                    Id = s.Id,
-                    Attributes = new StudentAttributes() 
-                    {
-                       Name = s.Attributes.Name,
-                       Age = s.Attributes.Age,
-                       Gender = s.Attributes.Gender,
-                       Address = s.Attributes.Address
-                    }
-
-                }).ToList();
-
-                Log4Logger.Logger.Info($"GetStudents");
-
-                return Ok(new ApiResponse<IEnumerable<StudentDto>>(studentDtos));
+                return Ok(new ApiResponse<IEnumerable<StudentDto>?>(students));
             }
             catch (Exception ex)
             {
@@ -59,13 +41,14 @@ namespace WebapiStandard.Controllers.react.study
         [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
         public async Task<ActionResult<StudentDto>> GetStudentById(int id)
         {
-            var targetSutdent = await _studentService.GetStudentByIdAsync(id);
+            HttpContext.Items.TryGetValue("student", out object? student);
 
-            return Ok(targetSutdent);
+            await Task.CompletedTask;
+            return Ok(student as StudentDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<StudentDto>> CreateStudent([FromForm] CreateStudentDto studentDto)
+        public async Task<ActionResult<StudentDto?>> CreateStudent([FromForm] CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
             return newStudent;
