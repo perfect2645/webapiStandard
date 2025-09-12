@@ -24,7 +24,7 @@ namespace WebapiStandard.Controllers.react.study
 
         [HttpGet]
         [Route("all")]
-        public async Task<ActionResult<IEnumerable<StudentDto>?>> GetStudents()
+        public async Task<ActionResult<IEnumerable<StudentDto>?>> GetStudentsAsync()
         {
             try
             {
@@ -39,7 +39,7 @@ namespace WebapiStandard.Controllers.react.study
 
         [HttpGet("{id}")]
         [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
-        public async Task<ActionResult<StudentDto>> GetStudentById(int id)
+        public async Task<ActionResult<StudentDto>> GetStudentByIdAsync(int id)
         {
             HttpContext.Items.TryGetValue("student", out object? student);
 
@@ -48,15 +48,33 @@ namespace WebapiStandard.Controllers.react.study
         }
 
         [HttpPost]
-        public async Task<ActionResult<StudentDto?>> CreateStudent([FromBody] CreateStudentDto studentDto)
+        [TypeFilter(typeof(StudentCreateValidationFilterAttribute))]
+        public async Task<ActionResult<StudentDto?>> CreateStudentAsync([FromBody] CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
-            return newStudent;
+            if (newStudent == null)
+            {
+                return BadRequest();
+            }
+
+            return CreatedAtAction(nameof(GetStudentByIdAsync),
+                new { id= newStudent.Id },
+                newStudent);
+        }
+
+        [HttpPut("{id}")]
+        [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
+        [TypeFilter(typeof(StudentUpdateValidationFilterAttribute))]
+        [TypeFilter(typeof(StudentUpdateExceptionFilterAttribute))]
+        public async Task<IActionResult> UpdateStudentAsync(int id, StudentDto studentDto)
+        {
+            await _studentService.UpdateStudentAsync(id, studentDto);
+            return NoContent();
         }
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<ActionResult<StudentDto>> DeleteStudent(int id)
+        public async Task<ActionResult<StudentDto>> DeleteStudentAsync(int id)
         {
             var studentDto = await _studentService.DeleteStudentAsync(id);
             if (studentDto == null)

@@ -5,6 +5,7 @@ using System.Reflection;
 using Utils.Ioc;
 using WebapiStandard.Configurations.Route;
 using WebapiStandard.Constants;
+using WebapiStandard.Filters;
 using WebapiStandard.Services.Auth;
 
 namespace WebapiStandard.Configurations.Services
@@ -20,15 +21,20 @@ namespace WebapiStandard.Configurations.Services
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddControllers(options =>
             {
-                options.AddControllerPrifx();
+                options.AddControllerPrefix();
             });
-            //services.AddControllers(option =>
-            //{
-            //    option.Filters.Add<ExceptionFilterAttribute>();
-            //}).AddJsonOptions(option =>
+            //.AddJsonOptions(option =>
             //{
             //    option.JsonSerializerOptions.Converters.Add(new QueryExpressionValueConverter());
             //});
+        }
+
+        public static void AddFilters(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<GlobalExceptionFilter>();
+            });
         }
 
         private static void UseAutofac(this WebApplicationBuilder builder)
@@ -70,7 +76,7 @@ namespace WebapiStandard.Configurations.Services
             //    });
         }
 
-        private static void AddControllerPrifx(this MvcOptions options)
+        private static void AddControllerPrefix(this MvcOptions options)
         {
             options.Conventions.Insert(0, new RouteConvention(new RouteAttribute(ProjectConstants.RoutePrefix)));
         }
