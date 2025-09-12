@@ -48,7 +48,7 @@ namespace WebapiStandard.Controllers.react.study
         }
 
         [HttpPost]
-        public async Task<ActionResult<StudentDto?>> CreateStudent([FromForm] CreateStudentDto studentDto)
+        public async Task<ActionResult<StudentDto?>> CreateStudent([FromBody] CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
             return newStudent;

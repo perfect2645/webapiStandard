@@ -31,7 +31,7 @@ namespace WebapiStandard.Filters.react.Study
                 return;
             }
 
-            var student = _studentService.GetStudentByIdAsync(id.Value);
+            var student = await _studentService.GetStudentByIdAsync(id.Value);
             if (student == null)
             {
                 context.ModelState.AddModelError("Id", "Student doesn't exist.");
