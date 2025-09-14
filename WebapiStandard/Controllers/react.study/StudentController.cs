@@ -49,7 +49,7 @@ namespace WebapiStandard.Controllers.react.study
 
         [HttpPost]
         [TypeFilter(typeof(StudentCreateValidationFilterAttribute))]
-        public async Task<ActionResult> CreateStudentAsync([FromBody] CreateStudentDto studentDto)
+        public async Task<IActionResult> CreateStudentAsync([FromBody] CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
             if (newStudent == null)
@@ -57,9 +57,9 @@ namespace WebapiStandard.Controllers.react.study
                 return BadRequest();
             }
 
-            return CreatedAtAction(nameof(GetStudentByIdAsync),
-                new { id= newStudent.Id },
-                newStudent);
+            var response = CreatedAtRoute(new { controller = "Student", id = newStudent.Id }, newStudent);
+
+            return response;
         }
 
         [HttpPut("{id}")]

@@ -23,19 +23,12 @@ namespace WebapiStandard.Configurations.Services
             builder.Services.AddControllers(options =>
             {
                 options.AddControllerPrefix();
+                options.Filters.Add<GlobalExceptionFilter>();
             });
             //.AddJsonOptions(option =>
             //{
             //    option.JsonSerializerOptions.Converters.Add(new QueryExpressionValueConverter());
             //});
-        }
-
-        public static void AddFilters(this WebApplicationBuilder builder)
-        {
-            builder.Services.AddControllers(options =>
-            {
-                options.Filters.Add<GlobalExceptionFilter>();
-            });
         }
 
         private static void UseAutofac(this WebApplicationBuilder builder)
