@@ -15,7 +15,7 @@ namespace WebapiStandard.Filters.react.Study
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            var studentDto = context.ActionArguments["studentDto"] as StudentDto;
+            var studentDto = context.ActionArguments["studentDto"] as CreateStudentDto;
             if (studentDto == null)
             {
                 context.ModelState.AddModelError("studentDto", "Student is null.");

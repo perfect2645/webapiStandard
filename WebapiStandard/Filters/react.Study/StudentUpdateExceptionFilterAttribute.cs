@@ -15,19 +15,27 @@ namespace WebapiStandard.Filters.react.Study
 
         public async Task OnExceptionAsync(ExceptionContext context)
         {
-            var strId = context.RouteData.Values["id"] as string;
-            var id = strId.ToInt();
-            if (id > 0 && !await _studentService.StudentExistsAsync(id))
-            {
-                context.ModelState.AddModelError("StudentId", "Student doesn't exist anymore.");
-                var problemDetails = new ValidationProblemDetails(context.ModelState)
-                {
-                    Status = StatusCodes.Status404NotFound,
-                };
+            //var strId = context.RouteData.Values["id"] as string;
+            //var id = strId.ToInt();
+            //if (id > 0 && !await _studentService.StudentExistsAsync(id))
+            //{
+            //    context.ModelState.AddModelError("StudentId", "Student doesn't exist anymore.");
+            //    var problemDetails = new ValidationProblemDetails(context.ModelState)
+            //    {
+            //        Status = StatusCodes.Status404NotFound,
+            //    };
 
-                context.Result = new NotFoundObjectResult(problemDetails);
-                return;
-            }
+            //    context.Result = new NotFoundObjectResult(problemDetails);
+            //    return;
+            //}
+
+            context.ModelState.AddModelError("Student", context.Exception.Message);
+            var problem = new ValidationProblemDetails(context.ModelState)
+            {
+                Status = StatusCodes.Status400BadRequest,
+            };
+            context.Result = new NotFoundObjectResult(problem);
+            await Task.CompletedTask;
 
             context.ExceptionHandled = true;
         }

@@ -26,3 +26,8 @@ Swashbuckle.AspNetCore.Annotations
 ### Package - Webapi
 - Microsoft.EntityFrameworkCore.Design
 
+
+## HttpContext
+- Microsoft.AspNetCore.Http.Abstractions
+可以在Service中注入 IHttpContextAccessor
+

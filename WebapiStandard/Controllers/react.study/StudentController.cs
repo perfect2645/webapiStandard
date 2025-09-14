@@ -41,7 +41,7 @@ namespace WebapiStandard.Controllers.react.study
         [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
         public async Task<ActionResult<StudentDto>> GetStudentByIdAsync(int id)
         {
-            HttpContext.Items.TryGetValue("student", out object? student);
+            HttpContext.Items.TryGetValue("studentDto", out object? student);
 
             await Task.CompletedTask;
             return Ok(student as StudentDto);
@@ -49,7 +49,7 @@ namespace WebapiStandard.Controllers.react.study
 
         [HttpPost]
         [TypeFilter(typeof(StudentCreateValidationFilterAttribute))]
-        public async Task<ActionResult<StudentDto?>> CreateStudentAsync([FromBody] CreateStudentDto studentDto)
+        public async Task<ActionResult> CreateStudentAsync([FromBody] CreateStudentDto studentDto)
         {
             var newStudent = await _studentService.CreateStudentAsync(studentDto);
             if (newStudent == null)
@@ -63,8 +63,8 @@ namespace WebapiStandard.Controllers.react.study
         }
 
         [HttpPut("{id}")]
-        [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
         [TypeFilter(typeof(StudentUpdateValidationFilterAttribute))]
+        [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
         [TypeFilter(typeof(StudentUpdateExceptionFilterAttribute))]
         public async Task<IActionResult> UpdateStudentAsync(int id, StudentDto studentDto)
         {
@@ -74,6 +74,7 @@ namespace WebapiStandard.Controllers.react.study
 
         [HttpDelete]
         [Route("{id:int}")]
+        [TypeFilter(typeof(StudentIdValidationFilterAttribute))]
         public async Task<ActionResult<StudentDto>> DeleteStudentAsync(int id)
         {
             var studentDto = await _studentService.DeleteStudentAsync(id);

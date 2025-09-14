@@ -43,7 +43,7 @@ namespace WebapiStandard.Filters.react.Study
                 return;
             }
 
-            context.HttpContext.Items.TryAdd("student", student);
+            context.HttpContext.Items.TryAdd("studentDto", student);
 
             await next();
         }

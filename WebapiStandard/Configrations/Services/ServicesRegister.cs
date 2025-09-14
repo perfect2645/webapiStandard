@@ -16,6 +16,7 @@ namespace WebapiStandard.Configurations.Services
         {
             builder.UseAutofac();
             builder.Services.AddSignalR();
+            builder.Services.AddHttpContextAccessor();
             // JWT Authentication
             RegisterJwt(builder);
             builder.Services.AddScoped<ITokenService, TokenService>();
