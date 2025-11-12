@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using WebapiStandard.Configurations.Services;
 
 namespace WebapiStandard.Configurations.Swagger
 {
@@ -39,6 +40,11 @@ namespace WebapiStandard.Configurations.Swagger
                 options.OperationFilter<VersionControlParameter>();
 
                 #endregion Switch API versions by Asp.Versioning.Mvc
+            });
+            builder.Services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
             });
         }
 

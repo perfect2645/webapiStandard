@@ -6,7 +6,7 @@ using WebapiStandard.Services.Auth;
 namespace WebapiStandard.Controllers.saiou
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("system/[controller]")]
     [ApiVersion(2.0)]
     //[Authorize]
     public class AuthController : ControllerBase

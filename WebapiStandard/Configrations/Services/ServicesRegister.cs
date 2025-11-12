@@ -5,6 +5,7 @@ using System.Reflection;
 using Utils.Ioc;
 using WebapiStandard.Configurations.Route;
 using WebapiStandard.Constants;
+using WebapiStandard.Filters;
 using WebapiStandard.Services.Auth;
 
 namespace WebapiStandard.Configurations.Services
@@ -15,17 +16,16 @@ namespace WebapiStandard.Configurations.Services
         {
             builder.UseAutofac();
             builder.Services.AddSignalR();
+            builder.Services.AddHttpContextAccessor();
             // JWT Authentication
             RegisterJwt(builder);
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddControllers(options =>
             {
-                options.AddControllerPrifx();
+                options.AddControllerPrefix();
+                options.Filters.Add<GlobalExceptionFilter>();
             });
-            //services.AddControllers(option =>
-            //{
-            //    option.Filters.Add<ExceptionFilterAttribute>();
-            //}).AddJsonOptions(option =>
+            //.AddJsonOptions(option =>
             //{
             //    option.JsonSerializerOptions.Converters.Add(new QueryExpressionValueConverter());
             //});
@@ -42,7 +42,8 @@ namespace WebapiStandard.Configurations.Services
                 containerBuilder.RegisterModule(new AutoRegisterModule(
                     Assembly.GetExecutingAssembly(),
                     // 可以添加更多需要扫描的程序集
-                    Assembly.Load("SaiouService")
+                    Assembly.Load("SaiouService"),
+                    Assembly.Load("React.Study")
                 ));
 
                 // 这里可以添加其他手动注册
@@ -69,7 +70,7 @@ namespace WebapiStandard.Configurations.Services
             //    });
         }
 
-        private static void AddControllerPrifx(this MvcOptions options)
+        private static void AddControllerPrefix(this MvcOptions options)
         {
             options.Conventions.Insert(0, new RouteConvention(new RouteAttribute(ProjectConstants.RoutePrefix)));
         }
