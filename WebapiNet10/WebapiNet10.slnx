@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Common/">
+    <Project Path="../../Laboratory/Logging/Logging.csproj" />
+    <Project Path="../../Laboratory/Utils/Utils.csproj" />
+  </Folder>
   <Folder Name="/Repositories/">
     <Project Path="../Fawei.Repository.Core/Fawei.Repository.Core.csproj" />
     <Project Path="../Fawei.Repository/Fawei.Repository.csproj" />

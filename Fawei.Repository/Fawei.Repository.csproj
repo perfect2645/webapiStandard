@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Laboratory\Logging\Logging.csproj" />
+    <ProjectReference Include="..\..\Laboratory\Utils\Utils.csproj" />
+  </ItemGroup>
+
 </Project>
