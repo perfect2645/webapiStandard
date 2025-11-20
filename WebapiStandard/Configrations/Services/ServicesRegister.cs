@@ -42,7 +42,6 @@ namespace WebapiStandard.Configurations.Services
                 containerBuilder.RegisterModule(new AutoRegisterModule(
                     Assembly.GetExecutingAssembly(),
                     // 可以添加更多需要扫描的程序集
-                    Assembly.Load("SaiouService"),
                     Assembly.Load("React.Study")
                 ));
 
