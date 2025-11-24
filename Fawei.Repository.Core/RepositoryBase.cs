@@ -22,13 +22,14 @@ namespace Fawei.Repository.Core
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null, CancellationToken ct = default)
         {
             return predicate == null
-                ? await DbSet.ToListAsync(ct)
-                : await DbSet.Where(predicate).ToListAsync(ct);
+                ? await DbSet.AsNoTracking().ToListAsync(ct)
+                : await DbSet.AsNoTracking().Where(predicate).ToListAsync(ct);
         }
 
-        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken ct = default)
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate, bool asNoTracking = false, CancellationToken ct = default)
         {
-            return await DbSet.FirstOrDefaultAsync(predicate, ct);
+            var query = asNoTracking ? DbSet.AsNoTracking() : DbSet;
+            return await query.FirstOrDefaultAsync(predicate, ct);
         }
 
         public async Task<T?> GetByIdAsync(int id, CancellationToken ct = default)
@@ -41,9 +42,9 @@ namespace Fawei.Repository.Core
             await DbSet.AddAsync(entity, ct);
         }
 
-        public async Task<T?> DeleteAsync(int id)
+        public async Task<T?> DeleteAsync(int id, CancellationToken ct = default)
         {
-            var entity = await GetByIdAsync(id);
+            var entity = await GetByIdAsync(id, ct);
             if (entity != null)
             {
                 DbSet.Remove(entity);
