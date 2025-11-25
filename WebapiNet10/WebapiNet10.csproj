@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Laboratory\Logging\Logging.csproj" />
     <ProjectReference Include="..\..\Laboratory\Utils\Utils.csproj" />
   </ItemGroup>

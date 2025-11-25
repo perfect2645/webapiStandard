@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fawei.Repository.shirt
+namespace Fawei.Repository.Entities
 {
     public class Shirt
     {
