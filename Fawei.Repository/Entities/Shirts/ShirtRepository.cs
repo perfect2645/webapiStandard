@@ -1,7 +1,7 @@
 ﻿using Fawei.Repository.Core;
 using Microsoft.EntityFrameworkCore;
 
-namespace Fawei.Repository.shirt
+namespace Fawei.Repository.Entities.Shirts
 {
     public class ShirtRepository : RepositoryBase<Shirt>
     {

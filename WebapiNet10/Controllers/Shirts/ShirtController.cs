@@ -11,6 +11,7 @@ namespace WebapiNet10.Controllers.Shirt
         {
             _logger = logger;
         }
+
         [HttpGet]
         public IActionResult GetAllShirts()
         {
