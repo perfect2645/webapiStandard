@@ -1,7 +1,10 @@
+using WebapiNet10.Configurations.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddLog4Net("log4net.config");
 // Add services to the container.
-builder.Services.AddControllers();
+builder.RegisterServices();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
