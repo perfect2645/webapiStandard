@@ -2,7 +2,7 @@
 {
     public static class RouteConfig
     {
-        public static IServiceCollection ConfigureRoute(this IServiceCollection services)
+        public static IServiceCollection ConfigureRoutes(this IServiceCollection services)
         {
             services.AddRouting(options =>
             {
