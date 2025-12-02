@@ -32,17 +32,18 @@ namespace Fawei.Repository.Core
             return await query.FirstOrDefaultAsync(predicate, ct);
         }
 
-        public async Task<T?> GetByIdAsync(int id, CancellationToken ct = default)
+        public async ValueTask<T?> GetByIdAsync(int id, CancellationToken ct = default)
         {
             return await DbSet.FindAsync(id, ct);
         }
 
-        public async Task AddAsync(T entity, CancellationToken ct = default)
+        public async ValueTask<T> AddAsync(T entity, CancellationToken ct = default)
         {
-            await DbSet.AddAsync(entity, ct);
+            var addedEntry = await DbSet.AddAsync(entity, ct);
+            return addedEntry.Entity;
         }
 
-        public async Task<T?> DeleteAsync(int id, CancellationToken ct = default)
+        public async ValueTask<T?> DeleteAsync(int id, CancellationToken ct = default)
         {
             var entity = await GetByIdAsync(id, ct);
             if (entity != null)
@@ -53,10 +54,10 @@ namespace Fawei.Repository.Core
             return entity;
         }
 
-        public async Task UpdateAsync(T entity)
+        public async ValueTask UpdateAsync(T entity)
         {
             DbSet.Update(entity);
-            await Task.CompletedTask;
+            await ValueTask.CompletedTask;
         }
 
         public async Task<int> SaveChangeAsync(CancellationToken ct = default)

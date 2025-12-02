@@ -1,4 +1,4 @@
-﻿namespace WebapiNet10.Models.Shirt
+﻿namespace WebapiNet10.Models.Shirts
 {
     public class ShirtDto
     {
