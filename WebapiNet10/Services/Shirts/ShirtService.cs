@@ -1,9 +1,11 @@
 ﻿using Fawei.Repository.Entities.Shirts;
 using System.Linq.Expressions;
+using Utils.Ioc;
 using WebapiNet10.Models.Shirts;
 
 namespace WebapiNet10.Services.Shirts
 {
+    [Register(ServiceType = typeof(IShirtService))]
     public class ShirtService : IShirtService
     {
         private readonly ShirtRepository _shirtRepository;

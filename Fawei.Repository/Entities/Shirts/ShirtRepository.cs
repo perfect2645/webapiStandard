@@ -1,9 +1,11 @@
 ﻿using Fawei.Repository.Core;
 using Microsoft.EntityFrameworkCore;
+using Utils.Ioc;
 
 namespace Fawei.Repository.Entities.Shirts
 {
-    public class ShirtRepository : RepositoryBase<Shirt>
+    [Register(ServiceType = typeof(IShirtRepository))]
+    public class ShirtRepository : RepositoryBase<Shirt>, IShirtRepository
     {
         public ShirtRepository(DbContext dbContext) : base(dbContext)
         {
