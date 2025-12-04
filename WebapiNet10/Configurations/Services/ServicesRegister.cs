@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Fawei.Repository.Entities.Shirts;
 using System.Reflection;
+using Utils.Aspnet.Filters;
 using Utils.Ioc;
 
 namespace WebapiNet10.Configurations.Services
@@ -13,7 +15,7 @@ namespace WebapiNet10.Configurations.Services
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddControllers(options =>
             {
-                //options.Filters.Add<GlobalExcetionFilter>()
+                options.Filters.Add<GlobalExceptionFilter>();
             });
 
             builder.RegisterMiddlewares();
@@ -26,8 +28,8 @@ namespace WebapiNet10.Configurations.Services
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
                 containerBuilder.RegisterModule(new AutoRegisterModule(
-                    Assembly.GetExecutingAssembly()
-                    //typeof(IShirtService).Assembly,
+                    Assembly.GetExecutingAssembly(),
+                    typeof(IShirtRepository).Assembly
                 ));
             });
         }

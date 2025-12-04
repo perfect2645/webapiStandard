@@ -8,9 +8,9 @@ namespace WebapiNet10.Services.Shirts
     [Register(ServiceType = typeof(IShirtService))]
     public class ShirtService : IShirtService
     {
-        private readonly ShirtRepository _shirtRepository;
+        private readonly IShirtRepository _shirtRepository;
 
-        public ShirtService(ShirtRepository shirtRepository) 
+        public ShirtService(IShirtRepository shirtRepository) 
         {
             _shirtRepository = shirtRepository;
         }
@@ -21,10 +21,10 @@ namespace WebapiNet10.Services.Shirts
             return await _shirtRepository.ExistAsync(predicate);
         }
 
-        public async Task<IEnumerable<ShirtDto>> GetAllShirtsAsync()
+        public async Task<IReadOnlyList<ShirtDto>> GetAllShirtsAsync()
         {
             var shirts = await _shirtRepository.GetAllAsync();
-            return shirts.Select(s => s.ToDto());
+            return shirts.Select(s => s.ToDto()).ToList();
         }
 
         public async Task<ShirtDto?> GetShirtByIdAsync(int shirtId)

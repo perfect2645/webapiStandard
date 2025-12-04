@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebapiNet10.Services.Shirts;
 
 namespace WebapiNet10.Controllers.Shirt
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ShirtController : ControllerBase
     {
-        private readonly ILogger _logger;
-        public ShirtController(ILogger logger)
+        private readonly ILogger<ShirtController> _logger;
+        private readonly IShirtService _shirtService;
+        public ShirtController(ILoggerFactory loggerFactory, IShirtService shirtService)
         {
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger<ShirtController>();
+            _shirtService = shirtService;
         }
 
-        [HttpGet]
+        [HttpGet("shirts")]
         public IActionResult GetAllShirts()
         {
-            return Ok("ShirtController is working!");
+            var shirtDtos = _shirtService.GetAllShirtsAsync();
+            return Ok(shirtDtos);
         }
     }
 }
