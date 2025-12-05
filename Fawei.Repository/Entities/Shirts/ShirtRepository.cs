@@ -4,11 +4,13 @@ using Utils.Ioc;
 
 namespace Fawei.Repository.Entities.Shirts
 {
-    [Register(ServiceType = typeof(IShirtRepository))]
+    [Register(ServiceType = typeof(IShirtRepository), Lifetime = Lifetime.Scoped)]
     public class ShirtRepository : RepositoryBase<Shirt>, IShirtRepository
     {
-        public ShirtRepository(DbContext dbContext) : base(dbContext)
+        private readonly ShirtsDbContext _dbContext;
+        public ShirtRepository(ShirtsDbContext dbContext) : base(dbContext)
         {
+            _dbContext = dbContext;
         }
 
         public Task<Shirt?> GetByPropertiesAsync(string brand, string gender, string color, int size)
