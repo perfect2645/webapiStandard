@@ -46,9 +46,9 @@ namespace WebapiNet10.Controllers.Shirt
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateShirtAsync([FromBody] CreateShirtDto shirtDto)
+        public async Task<IActionResult> CreateShirtAsync([FromBody] CreateShirtDto createShirtDto)
         {
-            var createdShirtDto = await _shirtService.AddShirtAsync(shirtDto);
+            var createdShirtDto = await _shirtService.AddShirtAsync(createShirtDto);
             return CreatedAtAction(nameof(GetShirtByIdAsync),
                 new { id = createdShirtDto.ShirtId },
                 createdShirtDto);
