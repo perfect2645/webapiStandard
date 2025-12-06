@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebapiNet10.Filters.Shirts;
 using WebapiNet10.Models.Shirts;
 using WebapiNet10.Models.Shirts.Validations;
 using WebapiNet10.Services.Shirts;
@@ -40,10 +41,11 @@ namespace WebapiNet10.Controllers.Shirt
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
+        [TypeFilter(typeof(ShirtIdValidationFilterAttribute))]
         public async Task<IActionResult> GetShirtByIdAsync(int id)
         {
             var shirtDto = HttpContext.Items.TryGetValue("ShirtDto", out var dto) ? dto as ShirtDto : null;
-            return Ok(shirtDto);
+            return await Task.FromResult(Ok(shirtDto));
         }
 
         /// <summary>
@@ -52,12 +54,13 @@ namespace WebapiNet10.Controllers.Shirt
         /// <param name="createShirtDto"></param>
         /// <returns></returns>
         [HttpPost]
+        [TypeFilter(typeof(ShirtCreationValidationFilterAttribute))]
         public async Task<IActionResult> CreateShirtAsync([FromBody] CreateShirtDto createShirtDto)
         {
-            var createdShirtDto = await _shirtService.AddShirtAsync(createShirtDto);
+            var shirtDto = await _shirtService.AddShirtAsync(createShirtDto);
             return CreatedAtAction(nameof(GetShirtByIdAsync),
-                new { id = createdShirtDto.ShirtId },
-                createdShirtDto);
+                new { id = shirtDto.ShirtId },
+                shirtDto);
         }
 
         /// <summary>
@@ -67,12 +70,14 @@ namespace WebapiNet10.Controllers.Shirt
         /// <param name="shirtDto"></param>
         /// <returns></returns>
         [HttpPut("{id:int}")]
+        [TypeFilter(typeof(ShirtIdValidationFilterAttribute))]
+        [TypeFilter(typeof(ShirtUpdateValidationFilterAttribute))]
+        [TypeFilter(typeof(ShirtUpdateExceptionFilterAttribute))]
         public async Task<IActionResult> UpdateShirtAsync(int id, [FromBody] ShirtDto shirtDto)
         {
             await _shirtService.UpdateShirtAsync(shirtDto);
             return NoContent();
         }
-
 
         /// <summary>
         /// Delete a shirt
@@ -80,6 +85,7 @@ namespace WebapiNet10.Controllers.Shirt
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}")]
+        [TypeFilter(typeof(ShirtIdValidationFilterAttribute))]
         public async Task<IActionResult> DeleteShirtAsync(int id)
         {
             var shirtDto = await _shirtService.DeleteShirtAsync(id);

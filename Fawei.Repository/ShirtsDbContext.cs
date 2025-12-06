@@ -14,6 +14,8 @@ namespace Fawei.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<Shirt>().HasData(shirts);
         }
     }
 }
