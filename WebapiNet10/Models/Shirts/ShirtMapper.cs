@@ -18,6 +18,18 @@ namespace WebapiNet10.Models.Shirts
             };
         }
 
+        public static ShirtDto ToDto(this CreateShirtDto createShirtDto)
+        {
+            return new ShirtDto
+            {
+                Brand = createShirtDto.Brand,
+                Gender = createShirtDto.Gender,
+                Size = createShirtDto.Size,
+                Color = createShirtDto.Color,
+                Price = createShirtDto.Price
+            };
+        }
+
         public static Shirt ToEntity(this ShirtDto shirtDto)
         {
             return new Shirt

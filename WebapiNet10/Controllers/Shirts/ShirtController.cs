@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebapiNet10.Models.Shirts;
+using WebapiNet10.Models.Shirts.Validations;
 using WebapiNet10.Services.Shirts;
 
 namespace WebapiNet10.Controllers.Shirt
@@ -45,6 +46,11 @@ namespace WebapiNet10.Controllers.Shirt
             return Ok(shirtDto);
         }
 
+        /// <summary>
+        /// Create a shirt
+        /// </summary>
+        /// <param name="createShirtDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateShirtAsync([FromBody] CreateShirtDto createShirtDto)
         {
@@ -54,6 +60,12 @@ namespace WebapiNet10.Controllers.Shirt
                 createdShirtDto);
         }
 
+        /// <summary>
+        /// Update a shirt
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="shirtDto"></param>
+        /// <returns></returns>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateShirtAsync(int id, [FromBody] ShirtDto shirtDto)
         {
@@ -61,6 +73,12 @@ namespace WebapiNet10.Controllers.Shirt
             return NoContent();
         }
 
+
+        /// <summary>
+        /// Delete a shirt
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteShirtAsync(int id)
         {
