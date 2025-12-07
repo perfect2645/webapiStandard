@@ -23,8 +23,13 @@ Swashbuckle.AspNetCore.Annotations
 - Microsoft.EntityFrameworkCore
 - Microsoft.EntityFrameworkCore.SqlServer
 - Microsoft.EntityFrameworkCore.Tools
+
+> Run Add-Migration
+> Run Update-Database
 ### Package - Webapi
 - Microsoft.EntityFrameworkCore.Design
+
+
 
 
 ## HttpContext
