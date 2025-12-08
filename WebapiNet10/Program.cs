@@ -1,0 +1,32 @@
+using Fawei.Repository;
+using Fawei.Repository.Core.Configurations;
+using Logging;
+using WebapiNet10.Configurations.Services;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.AddLog4Net("log4net.config");
+builder.AddSqlServerContext<ShirtsDbContext>("Net10DemoDb");
+
+// Add services to the container.
+builder.RegisterServices();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "Webapi demo v1");
+    });
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

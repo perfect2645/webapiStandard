@@ -36,7 +36,6 @@
     <ProjectReference Include="..\..\Laboratory\Db.React.Study\Db.React.Study.csproj" />
     <ProjectReference Include="..\..\Laboratory\Logging\Logging.csproj" />
     <ProjectReference Include="..\..\Laboratory\React.Study\React.Study.csproj" />
-    <ProjectReference Include="..\..\Laboratory\SaiouServie\SaiouService.csproj" />
     <ProjectReference Include="..\..\Laboratory\Utils\Utils.csproj" />
   </ItemGroup>
 
