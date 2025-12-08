@@ -13,6 +13,16 @@
 ### Package - JWT
 Microsoft.AspNetCore.Authentication.JwtBearer
 
+### Openapi
+Embedded in .net10 Webapi SDK
+``` json
+//Properties/launchSettings.json
+"https": {
+      "launchBrowser": true,
+      // "launchUrl": "openapi/v1.json",
+      "launchUrl": "swagger",
+}
+```
 
 ### Swagger extension / Annotations
 Swashbuckle.AspNetCore

@@ -36,7 +36,8 @@ namespace WebapiNet10.Configurations.Services
 
         private static void RegisterMiddlewares(this WebApplicationBuilder builder)
         {
-            // Register middlewares here if needed
+            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            builder.Services.AddOpenApi();
         }
     }
 }
