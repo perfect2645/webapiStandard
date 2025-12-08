@@ -38,6 +38,8 @@ namespace WebapiNet10.Configurations.Services
         {
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            //builder.Services.AddApiVersioning()
         }
     }
 }

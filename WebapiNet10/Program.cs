@@ -11,7 +11,6 @@ builder.AddSqlServerContext<ShirtsDbContext>("Net10DemoDb");
 // Add services to the container.
 builder.RegisterServices();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

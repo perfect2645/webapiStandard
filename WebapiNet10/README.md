@@ -26,7 +26,6 @@ Embedded in .net10 Webapi SDK
 
 ### Swagger extension / Annotations
 Swashbuckle.AspNetCore
-Swashbuckle.AspNetCore.Annotations
 
 ## Entity Framework
 ### Package - Entity Framework Core

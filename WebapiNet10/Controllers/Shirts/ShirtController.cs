@@ -6,6 +6,7 @@ using WebapiNet10.Services.Shirts;
 
 namespace WebapiNet10.Controllers.Shirt
 {
+    //[ApiVersion]
     [ApiController]
     [Route("api/[controller]")]
     public class ShirtController : ControllerBase
