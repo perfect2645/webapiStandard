@@ -1,11 +1,13 @@
 using Fawei.Repository;
 using Fawei.Repository.Core.Configurations;
+using Logging;
+using System.Reflection;
 using Utils.Aspnet.Configurations;
 using WebapiNet10.Configurations.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Logging.AddLog4Net("log4net.config");
+builder.Logging.NetCoreLoggingSetup(Path.Combine("logs", builder.Environment.ApplicationName));
 builder.AddSqlServerContext<ShirtsDbContext>("Net10DemoDb");
 
 // Add services to the container.
