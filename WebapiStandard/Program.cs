@@ -5,6 +5,7 @@ using WebapiStandard.Configurations.Services;
 using WebapiStandard.Configurations.Swagger;
 using WebapiStandard.Configrations.Services;
 using WebapiStandard.Configrations.Route;
+using Utils.Aspnet.Configurations.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 

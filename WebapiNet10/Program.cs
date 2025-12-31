@@ -1,8 +1,8 @@
 using Fawei.Repository;
 using Fawei.Repository.Core.Configurations;
 using Logging;
-using System.Reflection;
 using Utils.Aspnet.Configurations;
+using Utils.Aspnet.Configurations.Swagger;
 using WebapiNet10.Configurations.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.NetCoreLoggingSetup(Path.Combine("logs", builder.Environment.ApplicationName));
 builder.AddSqlServerContext<ShirtsDbContext>("Net10DemoDb");
 
+builder.ConfigApiVersion();
+
 // Add services to the container.
 builder.RegisterServices();
 builder.Services.AllowCorsExt();
+builder.AddSwaggerGenExt($"{typeof(Program).Assembly.GetName().Name}.xml");
 
 var app = builder.Build();
 
@@ -20,10 +23,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/openapi/v1.json", "Webapi demo v1");
-    });
+    app.UseSwaggerExt();
 }
 
 app.UseHttpsRedirection();

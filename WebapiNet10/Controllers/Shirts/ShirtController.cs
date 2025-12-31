@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using WebapiNet10.Filters.Shirts;
 using WebapiNet10.Models.Shirts;
 using WebapiNet10.Models.Shirts.Validations;
@@ -6,7 +7,7 @@ using WebapiNet10.Services.Shirts;
 
 namespace WebapiNet10.Controllers.Shirt
 {
-    //[ApiVersion]
+    [ApiVersion(1.0)]
     [ApiController]
     [Route("api/[controller]")]
     public class ShirtController : ControllerBase
