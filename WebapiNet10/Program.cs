@@ -1,5 +1,6 @@
 using Fawei.Repository;
 using Fawei.Repository.Core.Configurations;
+using Fawei.Repository.Entities.Shirts;
 using Logging;
 using Utils.Aspnet.Configurations;
 using Utils.Aspnet.Configurations.Swagger;
@@ -13,6 +14,7 @@ builder.AddSqlServerContext<ShirtsDbContext>("Net10DemoDb");
 builder.ConfigApiVersion();
 
 // Add services to the container.
+builder.RegisterCommonServices();
 builder.RegisterServices();
 builder.Services.AllowCorsExt();
 builder.AddSwaggerGenExt($"{typeof(Program).Assembly.GetName().Name}.xml");
