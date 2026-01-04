@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Common/">
     <Project Path="../../Laboratory/Logging/Logging.csproj" />
+    <Project Path="../../Laboratory/NetUtils/NetUtils.csproj" />
     <Project Path="../../Laboratory/Utils/Utils.csproj" />
   </Folder>
   <Folder Name="/Repositories/">

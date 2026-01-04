@@ -1,5 +1,5 @@
 ﻿using Fawei.Repository.Entities.Shirts;
-using Utils.Aspnet.Configurations;
+using NetUtils.Aspnet.Configurations;
 
 namespace WebapiNet10.Configurations.Services
 {

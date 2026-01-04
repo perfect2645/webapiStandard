@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Laboratory\Logging\Logging.csproj" />
+    <ProjectReference Include="..\..\Laboratory\NetUtils\NetUtils.csproj" />
     <ProjectReference Include="..\..\Laboratory\Utils\Utils.csproj" />
     <ProjectReference Include="..\Fawei.Repository\Fawei.Repository.csproj" />
   </ItemGroup>
