@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebapiNet10.Filters.Shirts;
 using WebapiNet10.Models.Shirts;
-using WebapiNet10.Models.Shirts.Validations;
 using WebapiNet10.Services.Shirts;
 
 namespace WebapiNet10.Controllers.Shirt

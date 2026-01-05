@@ -1,8 +1,8 @@
 using Fawei.Repository;
-using Fawei.Repository.Core.Configurations;
 using Logging;
 using NetUtils.Aspnet.Configurations;
 using NetUtils.Aspnet.Configurations.Swagger;
+using NetUtils.Repository.Configurations;
 using WebapiNet10.Configurations.Services;
 
 var builder = WebApplication.CreateBuilder(args);

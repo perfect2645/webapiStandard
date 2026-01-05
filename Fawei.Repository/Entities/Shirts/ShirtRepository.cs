@@ -1,11 +1,11 @@
-﻿using Fawei.Repository.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using NetUtils.Repository;
 using Utils.Ioc;
 
 namespace Fawei.Repository.Entities.Shirts
 {
     [Register(ServiceType = typeof(IShirtRepository), Lifetime = Lifetime.Scoped)]
-    public class ShirtRepository : RepositoryBase<Shirt>, IShirtRepository
+    public class ShirtRepository : RepositoryBase<Shirt, int>, IShirtRepository
     {
         private readonly ShirtsDbContext _dbContext;
         public ShirtRepository(ShirtsDbContext dbContext) : base(dbContext)
